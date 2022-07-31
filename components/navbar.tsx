@@ -23,13 +23,11 @@ export default function Navbar() {
       <Link href='/vehicles'>
         <a className={style.link}>Vehicles</a>
       </Link>
-      <button>
-        {user ? (
-          <Logout />
-        ) : (
-          <Login />
-        )}
-      </button>
+      {user ? (
+        <Logout className={style["nav-button"]}/>
+      ) : (
+        <Login className={style["nav-button"]}/>
+      )}
     </nav>
   );
 }

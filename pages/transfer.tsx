@@ -11,3 +11,16 @@ export default function Transfer() {
 }
 
 export const getServerSideProps : GetServerSideProps = withPageAuthRequired();
+
+/* withPageAuthRequired() should wrap ur existing getServerSideProps if u have one, i think like below
+export const getServerSideProps = withPageAuthRequired({
+  async getServerSideProps(ctx) {
+    console.log("query", ctx.query);
+    // This was in the documentation but doesn't seem to be needed:
+    // https://auth0.github.io/nextjs-auth0/modules/helpers_with_page_auth_required.html#withpageauthrequiredoptions
+    //
+    // const session = getSession(ctx.req, ctx.res);
+    return { props: { customProp: "bar" } };
+  },
+});
+*/

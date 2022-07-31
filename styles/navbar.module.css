@@ -1,0 +1,44 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px 24px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  border-bottom: 1px solid var(--border-color);
+}
+
+
+.nav button {
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 12px 16px;
+  background-color: black;
+  border-radius: 8px;
+  border: none;
+  transition: background-color 0.15s ease;
+  color: white;
+  margin: 0 0 0 4rem;
+}
+.nav button:hover,
+.nav button:focus,
+.nav button:active {
+  background-color: var(--accent-color);
+}
+.nav button a {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.link {
+  color: rgb(94, 94, 94);
+  font-weight: 300;
+  margin: 0 1rem;
+}
+.link:hover {
+  color: var(--accent-color);
+}
+
+.title-link {
+  margin-right: auto;
+}

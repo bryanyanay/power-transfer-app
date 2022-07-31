@@ -1,4 +1,6 @@
 import Layout from "../components/layout";
+import { withPageAuthRequired } from "@auth0/nextjs-auth0";
+import { GetServerSideProps } from "next";
 
 export default function History() {
   return (
@@ -7,3 +9,5 @@ export default function History() {
     </Layout>
   );
 }
+
+export const getServerSideProps : GetServerSideProps = withPageAuthRequired();

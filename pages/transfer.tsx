@@ -1,3 +1,5 @@
+import { withPageAuthRequired } from "@auth0/nextjs-auth0";
+import { GetServerSideProps } from "next";
 import Layout from "../components/layout";
 
 export default function Transfer() {
@@ -7,3 +9,5 @@ export default function Transfer() {
     </Layout>
   );
 }
+
+export const getServerSideProps : GetServerSideProps = withPageAuthRequired();

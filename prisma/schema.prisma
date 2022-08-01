@@ -18,7 +18,7 @@ model User {
 
 model Vehicle {
   id String @id @default(uuid())
-  license String
+  license String 
   owner User @relation(fields: [ownerEmail], references: [email])
   ownerEmail String 
 

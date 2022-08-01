@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { prisma } from '../utils/db';
 
 import styles from '../styles/add-vehicle.module.css';
+import btnStyles from '../styles/button.module.css';
 
 
 export default function Vehicles({ vehicles }) {
@@ -46,14 +47,15 @@ export default function Vehicles({ vehicles }) {
 
   return (
     <Layout title="Your Vehicles">
-      <Table cols={["Vehicle ID", "License Plate"]}>
+      <Table wide={false} cols={["Vehicle ID", "License Plate"]}>
         {vehicles}
       </Table>
       <form className={styles.form}>
-        <button onClick={addVehicle} type="button">Add Vehicle</button>
+        <button className={btnStyles.button} onClick={addVehicle} type="button">Add Vehicle</button>
         <label htmlFor="license">Enter License: </label>
         <input 
           type="text" 
+          maxLength={6}
           onChange={(e) => { setLicense(e.target.value); }} 
           name="license" 
           value={license} 

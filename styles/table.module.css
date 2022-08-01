@@ -3,26 +3,46 @@
   margin: 2rem 15%;
   border-collapse: collapse; /* see: https://stackoverflow.com/questions/18679020/border-around-tr-element-doesnt-show */
 }
+.wide-table {
+  width: 94%;
+  margin: 2rem 3%;
+  border-collapse: collapse; /* see: https://stackoverflow.com/questions/18679020/border-around-tr-element-doesnt-show */
+}
 
 .header-row {
   border-bottom: 1px solid var(--border-color);
   text-align: left;
   font-size: 1.5rem;
 }
+.wide-header-row tr th {
+  border-bottom: 1px solid var(--border-color);
+  text-align: left;
+  font-size: 1.2rem;
+  font-weight: 400;
 
+  padding-left: 0.5rem;
+}
+.wide-header-row tr th:nth-child(odd) {
+  background-color: var(--border-color);
+}
+
+.wide-table tbody tr, 
 .table tbody tr {
   --cell-padding: 0.5rem;
   border-bottom: dotted 1px var(--border-color);
 }
+.wide-table tbody tr td,
 .table tbody tr td {
   padding-top: var(--cell-padding);
   padding-bottom: var(--cell-padding);
   padding-right: var(--cell-padding);   
 }
+.wide-table tbody tr td:first-child,
 .table tbody tr td:first-child {
   padding-left: var(--cell-padding);
   padding-right: 0;
 }
+.wide-table tbody tr:hover,
 .table tbody tr:hover {
   background-color: var(--border-color);
 }

@@ -16,9 +16,11 @@
   background-color: black;
   border-radius: 8px;
   border: none;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.3s;
   color: white;
   margin: 0 0 0 4rem;
+
+  line-height: 1;
 }
 .nav-button:hover,
 .nav-button:focus,

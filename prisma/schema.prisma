@@ -18,7 +18,7 @@ model User {
 
 model Vehicle {
   id String @id @default(uuid())
-  license String 
+  license String @unique
   owner User @relation(fields: [ownerEmail], references: [email])
   ownerEmail String 
 
@@ -36,6 +36,7 @@ model TxIP {
   rId String
   donor Vehicle @relation("DonatingTxIP", fields: [dId], references: [id])
   dId String
+  @@unique([rId, dId])
 }
 
 model Tx {

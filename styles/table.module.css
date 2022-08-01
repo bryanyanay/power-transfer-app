@@ -26,6 +26,11 @@
   background-color: var(--border-color);
 }
 
+.wide-table tbody {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
 .wide-table tbody tr, 
 .table tbody tr {
   --cell-padding: 0.5rem;

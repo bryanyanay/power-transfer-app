@@ -11,17 +11,16 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
+  email String @id
   name String 
-  email String @unique
   vehicles Vehicle[]
 }
 
 model Vehicle {
   id String @id @default(uuid())
   license String
-  owner User @relation(fields: [ownerId], references: [id])
-  ownerId String 
+  owner User @relation(fields: [ownerEmail], references: [email])
+  ownerEmail String 
 
   receivingTxIPs TxIP[] @relation("ReceivingTxIP")
   donatingTxIPs TxIP[] @relation("DonatingTxIP")

@@ -1,0 +1,29 @@
+.table {
+  width: 70%;
+  margin: 2rem 15%;
+  border-collapse: collapse; /* see: https://stackoverflow.com/questions/18679020/border-around-tr-element-doesnt-show */
+}
+
+.header-row {
+  border-bottom: 1px solid var(--border-color);
+  text-align: left;
+  font-size: 1.5rem;
+}
+
+.table tbody tr {
+  line-height: 2;
+  --cell-padding: 0.5rem;
+  border-bottom: dotted 1px var(--border-color);
+}
+.table tbody tr td {
+  padding-top: var(--cell-padding);
+  padding-bottom: var(--cell-padding);
+  padding-right: var(--cell-padding);   
+}
+.table tbody tr td:first-child {
+  padding-left: var(--cell-padding);
+  padding-right: 0;
+}
+.table tbody tr:hover {
+  background-color: var(--border-color);
+}

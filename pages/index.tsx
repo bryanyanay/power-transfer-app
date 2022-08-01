@@ -16,12 +16,12 @@ function LinkCard({href, title, description}: {href: string, title: string, desc
 }
 
 export default function Home() {
-  const { user } = useUser();
+  const { user } = useUser(); // should we add smth for if useUser is still loading the user or an error occurs??
 
   return (
     <Layout title="Power Transfer">
       <div className={styles.layout}>
-        { user ? // should we add smth for if useUser is still loading the user or an error occurs??
+        { user ? 
           <h1 className={styles.title}>Welcome, {user.name}</h1>
           :
           <h1 className={styles.title}>Welcome! Login to get started.</h1>

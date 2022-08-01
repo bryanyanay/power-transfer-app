@@ -17,6 +17,7 @@ function LinkCard({href, title, description}: {href: string, title: string, desc
 
 export default function Home() {
   const { user } = useUser();
+
   return (
     <Layout title="Power Transfer">
       <div className={styles.layout}>

@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(uuid())
+  name String 
+  email String @unique
+  vehicles Vehicle[]
+}
+
+model Vehicle {
+  id String @id @default(uuid())
+  license String
+  owner User @relation(fields: [ownerId], references: [id])
+  ownerId String 
+
+  receivingTxIPs TxIP[] @relation("ReceivingTxIP")
+  donatingTxIPs TxIP[] @relation("DonatingTxIP")
+
+  receivedTx Tx[] @relation("ReceivedTx")
+  donatedTx Tx[] @relation("DonatedTx")
+}
+
+model TxIP {
+  id String @id @default(uuid())
+  time DateTime @default(now())
+  recipient Vehicle @relation("ReceivingTxIP", fields: [rId], references: [id])
+  rId String
+  donor Vehicle @relation("DonatingTxIP", fields: [dId], references: [id])
+  dId String
+}
+
+model Tx {
+  id String @id @default(uuid())
+  start DateTime
+  stop DateTime @default(now())
+  recipient Vehicle @relation("ReceivedTx", fields: [rId], references: [id])
+  rId String
+  donor Vehicle @relation("DonatedTx", fields: [dId], references: [id])
+  dId String
+  kWhTransferred Decimal
+}

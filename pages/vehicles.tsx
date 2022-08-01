@@ -3,10 +3,11 @@ import { useUser, getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 
 import { useState } from 'react';
 import Table from "../components/table";
-import AddVehicle from "../components/addVehicle";
 import { useRouter } from "next/router";
 
 import { prisma } from '../utils/db';
+
+import styles from '../styles/add-vehicle.module.css';
 
 
 export default function Vehicles({ vehicles }) {
@@ -20,34 +21,27 @@ export default function Vehicles({ vehicles }) {
     router.replace(router.asPath);
   }
 
-  const addVehicle = async () => { //nvm can't do this on client-side, must use API routes
-    await prisma.vehicle.create({
-      data: {
+  const addVehicle = async () => { // can't post to database on client-side, must use API routes 
+    await fetch('/api/addVehicle', {
+      method: 'POST',
+      body: JSON.stringify({
         license: license,
-        owner: {
-          connectOrCreate: {
-            where: {
-              email: user.email
-            }, 
-            create: {
-              email: user.email,
-              name: user.name
-            }
-          }
-        }
+        user: user //technically we only need to send user.name and user.email, but im sending it all lmao
+      }),
+      headers: {
+        'Content-Type': 'application/json'
       }
     });
     setLicense("");
     refreshData();
   }
 
-
   if (vehicles.length) {
     vehicles = vehicles.map((v) => {
-      return <tr><td>{v.id}</td><td>{v.license}</td></tr>;
+      return <tr key={v.id}><td>{v.id}</td><td>{v.license}</td></tr>;
     })
   } else {
-    vehicles = <tr><td>No Vehicles</td><td></td></tr>
+    vehicles = <tr key={0}><td>No Vehicles</td><td></td></tr>
   }
 
   return (
@@ -55,7 +49,7 @@ export default function Vehicles({ vehicles }) {
       <Table cols={["Vehicle ID", "License Plate"]}>
         {vehicles}
       </Table>
-      <form>
+      <form className={styles.form}>
         <button onClick={addVehicle} type="button">Add Vehicle</button>
         <label htmlFor="license">Enter License: </label>
         <input 

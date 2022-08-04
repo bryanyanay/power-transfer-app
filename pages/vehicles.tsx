@@ -65,19 +65,6 @@ export default function Vehicles({ vehicles }) {
   );
 }
 
-export const getServerSideProps = async ({ req, res }) => {
-  const { user } = getSession(req, res);
-  const vehicles = await prisma.user.findUnique({
-    where: { email: user.email },
-    select: { vehicles: true }
-  });
-  if (!vehicles) { // vehicles is null if we don't find any i believe
-    return {props: { vehicles: [] } };
-  } else {
-    return { props: { vehicles: vehicles.vehicles } };
-  }
-}
-/*
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps({ req, res }) {
     const { user } = getSession(req, res);
@@ -92,4 +79,3 @@ export const getServerSideProps = withPageAuthRequired({
     }
   }
 });
-*/

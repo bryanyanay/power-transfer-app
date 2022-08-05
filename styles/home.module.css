@@ -46,6 +46,7 @@
 
   grid-area: title;
   align-self: center;
+  word-break: break-word;
 }
 
 .card-grid {

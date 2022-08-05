@@ -22,7 +22,7 @@ export default function Home() {
     <Layout title="Power Transfer">
       <div className={styles.layout}>
         { user ? 
-          <h1 className={styles.title}>Welcome, {user.name}</h1>
+          <h1 className={styles.title}>Welcome, {user.nickname}</h1>
           :
           <h1 className={styles.title}>Welcome! Login to get started.</h1>
         }

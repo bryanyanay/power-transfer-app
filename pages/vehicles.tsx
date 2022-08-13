@@ -68,14 +68,35 @@ export default function Vehicles({ vehicles }) {
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps({ req, res }) {
     const { user } = getSession(req, res);
-    const vehicles = await prisma.user.findUnique({
+/*     const vehicles = await prisma.user.findUnique({
       where: { email: user.email },
       select: { vehicles: true }
-    });
-    if (!vehicles) { // vehicles is null if we don't find any i believe
+    }); */
+
+    //
+    const qStr = {
+      "query": `query { test { id name } }`,
+      "variables": {}
+    };
+    const q = {
+      "method": "POST",
+      "headers": {
+        "content-type": "application/json",
+        "x-hasura-admin-secret": "OzHX6pZlS1h048tiedzyegBdmHA7ZFvJkXCphTV4bhCBObR6eWtGzxHWymnga481"
+      },
+      "body": JSON.stringify(qStr)
+    };
+    const test = await fetch("https://power-transfer-api.hasura.app/v1/graphql", q);
+    const data = await test.json();
+    console.log(data.data);
+    //
+
+
+/*     if (!vehicles) { // vehicles is null if we don't find any i believe
       return {props: { vehicles: [] } };
     } else {
       return { props: { vehicles: vehicles.vehicles } };
-    }
+    } */
+    return { props: { vehicles: [] } };
   }
 });

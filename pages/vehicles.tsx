@@ -11,7 +11,7 @@ import styles from '../styles/add-vehicle.module.css';
 import btnStyles from '../styles/button.module.css';
 
 
-export default function Vehicles({ vehicles, test }) {
+export default function Vehicles({ vehicles }) {
   const [license, setLicense] = useState("");
   const { user } = useUser();
   const router = useRouter();
@@ -61,13 +61,6 @@ export default function Vehicles({ vehicles, test }) {
           value={license} 
           id="license" />
       </form>
-      <div>
-        {
-          test.map((r) => {
-            return <p key={r.id}>{r.id}, {r.name}</p>;
-          })
-        }
-      </div>
     </Layout>
   );
 }
@@ -80,10 +73,14 @@ export const getServerSideProps = withPageAuthRequired({
       select: { vehicles: true }
     }); */
 
-    //
     const qStr = {
-      "query": `query { test { id name } }`,
-      "variables": {}
+      "query": `query ($email: String) {
+        Vehicle (where: {ownerEmail: {_eq: $email}}) {
+          id
+          license
+        }
+      }`,
+      "variables": { "email": user.email }
     };
     const q = {
       "method": "POST",
@@ -95,14 +92,12 @@ export const getServerSideProps = withPageAuthRequired({
     };
     const test = await fetch("https://power-transfer-api.hasura.app/v1/graphql", q);
     const data = await test.json();
-    //
-
 
 /*     if (!vehicles) { // vehicles is null if we don't find any i believe
       return {props: { vehicles: [] } };
     } else {
       return { props: { vehicles: vehicles.vehicles } };
     } */
-    return { props: { vehicles: [], test: data.data.test } };
+    return { props: { vehicles: data.data.Vehicle } };
   }
 });

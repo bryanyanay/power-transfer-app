@@ -11,7 +11,7 @@ import styles from '../styles/add-vehicle.module.css';
 import btnStyles from '../styles/button.module.css';
 
 
-export default function Vehicles({ vehicles }) {
+export default function Vehicles({ vehicles, test }) {
   const [license, setLicense] = useState("");
   const { user } = useUser();
   const router = useRouter();
@@ -61,6 +61,9 @@ export default function Vehicles({ vehicles }) {
           value={license} 
           id="license" />
       </form>
+      <div>
+        {test}
+      </div>
     </Layout>
   );
 }
@@ -93,11 +96,12 @@ export const getServerSideProps = withPageAuthRequired({
     const test = await fetch("https://power-transfer-api.hasura.app/v1/graphql", q);
     const data = await test.json();
 
+    return { props: { vehicles: [], test: data.data } };
+
 /*     if (!vehicles) { // vehicles is null if we don't find any i believe
       return {props: { vehicles: [] } };
     } else {
       return { props: { vehicles: vehicles.vehicles } };
     } */
-    return { props: { vehicles: data.data.Vehicle } };
   }
 });

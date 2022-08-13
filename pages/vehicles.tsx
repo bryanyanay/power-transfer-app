@@ -89,7 +89,7 @@ export const getServerSideProps = withPageAuthRequired({
       "method": "POST",
       "headers": {
         "content-type": "application/json",
-        "x-hasura-admin-secret": "OzHX6pZlS1h048tiedzyegBdmHA7ZFvJkXCphTV4bhCBObR6eWtGzxHWymnga481"
+        "x-hasura-admin-secret": process.env.X_HASURA_ADMIN_SECRET
       },
       "body": JSON.stringify(qStr)
     };

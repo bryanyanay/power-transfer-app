@@ -62,7 +62,7 @@ export default function Vehicles({ vehicles, test }) {
           id="license" />
       </form>
       <div>
-        {test}
+        {JSON.stringify(test)}
       </div>
     </Layout>
   );
@@ -96,7 +96,7 @@ export const getServerSideProps = withPageAuthRequired({
     const test = await fetch("https://power-transfer-api.hasura.app/v1/graphql", q);
     const data = await test.json();
 
-    return { props: { vehicles: [], test: data.data } };
+    return { props: { vehicles: [], test: data } };
 
 /*     if (!vehicles) { // vehicles is null if we don't find any i believe
       return {props: { vehicles: [] } };

@@ -97,7 +97,7 @@ export const getServerSideProps = withPageAuthRequired({
     const test = await fetch("https://power-transfer-api.hasura.app/v1/graphql", q);
     const data = await test.json();
 
-    return { props: { vehicles: [], test: data, e: user} };
+    return { props: { vehicles: data.data.Vehicle, test: data, e: user} };
 
 /*     if (!vehicles) { // vehicles is null if we don't find any i believe
       return {props: { vehicles: [] } };
